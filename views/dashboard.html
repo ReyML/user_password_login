@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Essential for responsive design -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- Helps with IE compatibility -->
+    <meta name="description" content="User dashboard for managing account settings and more."> <!-- SEO: Describe your page -->
+    <meta name="robots" content="noindex, nofollow"> <!-- If you don't want this page indexed by search engines -->
+
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+</head>
+
+<body class="font-sans leading-normal tracking-normal">
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto">
+            <div class="flex items-center justify-between flex-wrap"> <!-- Added flex-wrap for responsiveness -->
+                <div class="text-lg text-white font-semibold">
+                    Dashboard
+                </div>
+                <button class="btn btn-outline btn-accent" id="logoutButton">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 mt-8"> <!-- Added padding for smaller screens -->
+        <div class="bg-white p-4 md:p-8 rounded-lg shadow-lg"> <!-- Responsive padding -->
+            <h2 class="text-xl md:text-2xl font-bold mb-4">Manage Your Account</h2> <!-- Responsive text size -->
+            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4"> <!-- Stack on small screens, inline on larger -->
+                <button onclick="openUpdatePasswordModal()" class="btn btn-primary flex-1">Change Password</button>
+                <button onclick="deleteUserAccount()" class="btn btn-error flex-1">Delete My Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Password Modal -->
+    <div id="updatePasswordModal" class="hidden fixed inset-0 z-50 bg-black bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
+        <div class="modal-box bg-white p-4 md:p-6 rounded-lg shadow-lg">
+            <h3 class="text-2xl md:text-3xl font-bold mb-4">Update Password</h3>
+            <form id="updatePasswordForm" class="space-y-4">
+                <div>
+                    <label for="currentPassword" class="block text-sm font-medium text-gray-700">Current Password</label>
+                    <input type="password" id="currentPassword" class="input input-bordered w-full" required>
+                </div>
+                <div>
+                    <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password</label>
+                    <input type="password" id="newPassword" class="input input-bordered w-full" required>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" class="btn" onclick="closeUpdatePasswordModal()">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="updatePassword()">Update Password</button>
+                </div>
+            </form>
+            <span id="updatePasswordMessage" class="text-red-500 hidden"></span>
+        </div>
+    </div>
+
+    <script src="dashboard.js" defer></script>
+</body>
+
+</html>

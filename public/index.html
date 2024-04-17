@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Welcome to Your App - the gateway to managing your digital presence effectively.">
+    <meta name="robots" content="index, follow"> <!-- Adjust as necessary for search engine indexing -->
+    
+    <title>Ipsum</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>  
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app-check.js"></script>
+</head>
+
+<body class="font-sans antialiased bg-base-200">
+    <header class="bg-base-100 py-4">
+        <div class="container mx-auto flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="mr-2">
+                <defs>
+                    <linearGradient id="sw-gradient" x1="0" x2="1" y1="1" y2="0">
+                        <stop id="stop1" stop-color="rgba(29.114, 129.971, 137.301, 1)" offset="0%"></stop>
+                        <stop id="stop2" stop-color="rgba(26.549, 253.417, 214.988, 1)" offset="100%"></stop>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#sw-gradient)" d="M25.7,-29.3C32.4,-25.1,36.3,-16.1,37.6,-6.9C38.8,2.2,37.4,11.5,32.8,18.5C28.3,25.5,20.5,30.2,12.5,32.3C4.4,34.4,-3.8,33.8,-10.8,30.8C-17.7,27.7,-23.4,22.2,-27.4,15.6C-31.4,9.1,-33.8,1.3,-32.3,-5.5C-30.8,-12.3,-25.5,-18.2,-19.5,-22.5C-13.5,-26.9,-6.7,-29.8,1.4,-31.5C9.5,-33.2,19,-33.6,25.7,-29.3Z" width="100%" height="100%" transform="translate(50 50)" stroke-width="0" style="transition: all 0.3s ease 0s;" stroke="url(#sw-gradient)"></path>
+            </svg>
+            <span class="text-xl font-bold">Name</span>
+        </div>
+    </header>
+    <section class="hero min-h-screen bg-base-100 bg-opacity-90">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+            <div>
+                <h1 class="text-5xl font-bold">Welcome to Your App</h1>
+                <p class="py-6">Insert any custom text here.</p>
+                <button id="getStartedBtn" class="btn btn-primary" onclick="openLoginModal()">Get Started</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="loginModal" class="hidden fixed z-50 inset-0 bg-white bg-opacity-90 overflow-y-auto h-full w-full flex items-center justify-center">
+        <div class="modal-box text-gray-800 p-4 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold mb-4" id="authModalTitle">Login</h2>
+    
+            <form id="authForm">
+                <label for="email" class="label">
+                    <span class="label-text">Email:</span>
+                </label>
+                <input type="email" id="email" class="input input-bordered w-full mb-4" required>
+                <label for="password" class="label">
+                    <span class="label-text">Password:</span>
+                </label>
+                <input type="password" id="password" class="input input-bordered w-full mb-4" required>
+                <button type="button" class="btn btn-primary text-white" id="authButton" onclick="login()">Login</button>
+            </form>
+            <span id="loginErrorMessage" class="p-4" style="display: none; color: red;"></span>
+            <div class="modal-action">
+                <a href="#" class="btn text-blue-500" id="toggleAuthMode" onclick="toggleAuthMode()">Register instead</a>
+                <a href="#" class="btn text-blue-500" onclick="openPasswordResetModal()">Forgot Password?</a>
+                <a href="#" class="btn text-blue-500" onclick="closeLoginModal()">Close</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="passwordResetModal" class="hidden fixed z-50 inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
+        <div class="modal-box text-white p-4 rounded-lg shadow-lg bg-gray-800">
+            <h2 class="text-3xl font-bold mb-4">Reset Password</h2>
+            <div class="mb-4">
+                <input type="email" id="resetEmail" placeholder="Enter your email" required class="input input-bordered input-primary w-full">
+            </div>
+            <div class="flex justify-between">
+                <button onclick="sendPasswordResetEmail()" class="btn btn-primary">Send Password Reset Email</button>
+                <button onclick="closePasswordResetModal()" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js" defer></script>
+</body>
+</html>
+
